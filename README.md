@@ -7,7 +7,7 @@ library books.
 
 ## Level 1 Exercise 2
 **Description**:
-Add to the previous exercise’s class the
+Add to the previous exerciseï¿½s class the
 functionality to list a directory tree with the
 content of all its levels (recursively), so it is
 printed on screen in alphabetical order within each level,
@@ -28,6 +28,7 @@ display its contents in the console.
 **Description**:
 Create a Java class that manages a collection of
 library books.
+
 
 ## Technologies
 - Backend: Java-Maven.
