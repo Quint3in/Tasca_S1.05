@@ -7,7 +7,7 @@ library books.
 
 ## Level 1 Exercise 2
 **Description**:
-Add to the previous exercise�s class the
+Add to the previous exercise's class the
 functionality to list a directory tree with the
 content of all its levels (recursively), so it is
 printed on screen in alphabetical order within each level,
@@ -26,8 +26,21 @@ display its contents in the console.
 
 ## Level 1 Exercise 5
 **Description**:
-Create a Java class that manages a collection of
-library books.
+Now the program must serialize a Java object to a .ser file
+and then deserialize it.
+
+## Level 2 Exercise 1
+**Description**:
+Run exercise 3 from the previous level by parameterizing
+all methods in a configuration file.
+
+You can use a Java Properties file, or the Apache Commons
+Configuration library if you prefer.
+
+From the previous exercise, parameterize the following:
+
+    Directory to read.
+    Name and directory of the resulting TXT file.
 
 
 ## Technologies
@@ -35,4 +48,8 @@ library books.
 
 ## Installation and Execution
 1. Clone the repository: `git clone https://github.com/Quint3in/Tasca_S1.05.git`
-2. Run the application.
+2. Go into the project folder: `cd Tasca_S1.05`
+3. Build the module you want, for example:
+   `mvn -pl n1exercici1 -am package`
+4. Run it:
+   `java -cp n1exercici1/target/classes org.example.Main`
