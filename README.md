@@ -42,6 +42,24 @@ From the previous exercise, parameterize the following:
     Directory to read.
     Name and directory of the resulting TXT file.
 
+## Level 3 Exercise 1
+**Description**:
+In this final level you will dive into a key concept in 
+computer security: data encryption.
+
+You need to create a utility that can encrypt and decrypt 
+files, using one of the most widely used algorithms in the 
+real world: AES (Advanced Encryption Standard), in ECB or
+CBC mode, with PKCS5Padding.
+
+You may use the standard Java libraries (javax.crypto) or 
+explore more powerful alternatives like org.apache.commons.crypto.
+
+The goal is to understand how to protect sensitive 
+information with symmetric cryptography and apply it to 
+real cases such as the files generated in previous exercises.
+This exercise prepares you for professional environments 
+where security and privacy are essential.
 
 ## Technologies
 - Backend: Java-Maven.
