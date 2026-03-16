@@ -1,7 +1,7 @@
 package org.example;
 
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         FileManager a = new FileManager(".\\");
         String path = "n1exercici5/";
         Person p = new Person("Maria",25);
@@ -15,9 +15,5 @@ public class Main {
 
         FileManager.serializePersonToFile(p,path);
         System.out.println(FileManager.deserializePersonFromFile(path+"/"+p.getName()+".ser"));
-
-
-
-
     }
 }

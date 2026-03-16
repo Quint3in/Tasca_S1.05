@@ -1,7 +1,7 @@
 package org.example;
 
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         FileManager a = new FileManager(".\\");
         String inputFile = "n1exercici4/input.txt";
         //a.listAlphabetically().forEach(System.out::println);

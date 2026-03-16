@@ -22,9 +22,5 @@ public class Main {
         FileManager.encryptFile(basePersonFile, encryptedPersonFile, password);
         FileManager.decryptFile(encryptedPersonFile, decryptedPersonFile, password);
         System.out.println(FileManager.deserializePersonFromFile(decryptedPersonFile));
-
-
-
-
     }
 }

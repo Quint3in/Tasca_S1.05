@@ -5,7 +5,7 @@ import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         Configuration config = null;
         try {
             Configurations configs = new Configurations();
