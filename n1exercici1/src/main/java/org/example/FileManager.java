@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class FileManager {
 
-    private File file;
+    private final File file;
 
     public FileManager(String fileName) {
         this.file = new File(fileName);
