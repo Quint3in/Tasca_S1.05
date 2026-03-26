@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.exceptions.FileWritingException;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -34,11 +36,7 @@ public class FileManager {
         if (current == null || !current.exists()) {
             return;
         }
-
-        String type = current.isDirectory() ? "(D)" : "(F)";
-        String date = " | " + fmt.format(current.lastModified());
-        out.add(prefix + type + " " + current.getName() + date);
-
+        formatEntry(current, out, prefix, fmt);
         if (!current.isDirectory()) {
             return;
         }
@@ -51,16 +49,19 @@ public class FileManager {
             listRecursivelyAlphabetically(child, out, fmt, prefix + "  ");
         }
     }
+    private void formatEntry(File current,List<String> out, String prefix, SimpleDateFormat fmt) {
+        String type = current.isDirectory() ? "(D)" : "(F)";
+        String date = " | " + fmt.format(current.lastModified());
+        out.add(prefix + type + " " + current.getName() + date);
+    }
 
-    public boolean listRecursivelyAlphabeticallyIntoFile(String output) {
+    public void listRecursivelyAlphabeticallyIntoFile(String output) {
         try {
             Files.write(Paths.get(output), listRecursivelyAlphabetically(), StandardCharsets.UTF_8,
                     StandardOpenOption.CREATE,
                     StandardOpenOption.TRUNCATE_EXISTING);
-            return true;
         } catch (IOException ex) {
-            System.out.println("Error while writing to file: " + ex.getMessage());
+            throw new FileWritingException("Error while writing to file.");
         }
-        return false;
     }
 }

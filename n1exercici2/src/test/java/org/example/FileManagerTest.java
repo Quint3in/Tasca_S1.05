@@ -40,7 +40,6 @@ public class FileManagerTest {
         FileManager fileManager = new FileManager(tempDir.toString());
 
         List<String> result = fileManager.listRecursivelyAlphabetically();
-
         assertThat(result).hasSize(6);
         assertThat(result.get(0)).startsWith("(D) " + tempDir.getFileName()).contains(" | ");
         assertThat(result.get(1)).startsWith("  (D) alpha").contains(" | ");

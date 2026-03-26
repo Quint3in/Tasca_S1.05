@@ -29,11 +29,7 @@ public class FileManager {
         if (current == null || !current.exists()) {
             return;
         }
-
-        String type = current.isDirectory() ? "(D)" : "(F)";
-        String date = " | " + fmt.format(current.lastModified());
-        out.add(prefix + type + " " + current.getName() + date);
-
+        formatEntry(current, out, prefix, fmt);
         if (!current.isDirectory()) {
             return;
         }
@@ -45,5 +41,10 @@ public class FileManager {
         for (File child : children) {
             listRecursivelyAlphabetically(child, out, fmt, prefix + "  ");
         }
+    }
+    private void formatEntry(File current,List<String> out, String prefix, SimpleDateFormat fmt) {
+        String type = current.isDirectory() ? "(D)" : "(F)";
+        String date = " | " + fmt.format(current.lastModified());
+        out.add(prefix + type + " " + current.getName() + date);
     }
 }

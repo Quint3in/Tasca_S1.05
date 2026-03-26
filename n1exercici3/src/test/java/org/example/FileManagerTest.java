@@ -59,9 +59,8 @@ public class FileManagerTest {
         FileManager fileManager = new FileManager(tempDir.toString());
         Path output = Files.createTempFile("file-manager-output-", ".txt");
 
-        boolean wrote = fileManager.listRecursivelyAlphabeticallyIntoFile(output.toString());
+        fileManager.listRecursivelyAlphabeticallyIntoFile(output.toString());
 
-        assertThat(wrote).isTrue();
         assertThat(Files.exists(output)).isTrue();
         assertThat(Files.readAllLines(output)).containsExactlyElementsOf(
                 fileManager.listRecursivelyAlphabetically()

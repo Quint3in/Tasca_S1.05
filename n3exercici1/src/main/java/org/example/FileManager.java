@@ -3,6 +3,10 @@ package org.example;
 import org.apache.commons.crypto.cipher.CryptoCipher;
 import org.apache.commons.crypto.cipher.CryptoCipherFactory;
 import org.apache.commons.crypto.utils.Utils;
+import org.example.exceptions.FileReadingException;
+import org.example.exceptions.FileWritingException;
+import org.example.exceptions.ReadSerializedFileException;
+import org.example.exceptions.SerializePersonIntoFileException;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -49,11 +53,7 @@ public class FileManager {
         if (current == null || !current.exists()) {
             return;
         }
-
-        String type = current.isDirectory() ? "(D)" : "(F)";
-        String date = " | " + fmt.format(current.lastModified());
-        out.add(prefix + type + " " + current.getName() + date);
-
+        formatEntry(current, out, prefix, fmt);
         if (!current.isDirectory()) {
             return;
         }
@@ -66,46 +66,46 @@ public class FileManager {
             listRecursivelyAlphabetically(child, out, fmt, prefix + "  ");
         }
     }
+    private void formatEntry(File current,List<String> out, String prefix, SimpleDateFormat fmt) {
+        String type = current.isDirectory() ? "(D)" : "(F)";
+        String date = " | " + fmt.format(current.lastModified());
+        out.add(prefix + type + " " + current.getName() + date);
+    }
 
-    public boolean listRecursivelyAlphabeticallyIntoFile(String output) {
+    public void listRecursivelyAlphabeticallyIntoFile(String output) {
         try {
             Files.write(Paths.get(output), listRecursivelyAlphabetically(), StandardCharsets.UTF_8,
                     StandardOpenOption.CREATE,
                     StandardOpenOption.TRUNCATE_EXISTING);
-            return true;
         } catch (IOException ex) {
-            System.out.println("Error while writing to file: " + ex.getMessage());
+            throw new FileWritingException("Error while writing to file.");
         }
-        return false;
     }
 
     public static void readFile(String inputFile) {
         try (Stream<String> lines = Files.lines(Paths.get(inputFile), StandardCharsets.UTF_8)) {
             lines.forEach(System.out::println);
         } catch (IOException e) {
-            System.out.println("Error while reading file: " + e.getMessage());
+            throw new FileReadingException("Error while writing to file.");
         }
     }
 
-    public static boolean serializePersonToFile(Person p, String path) {
+    public static void serializePersonToFile(Person p, String path) {
         try (ObjectOutputStream oos = new ObjectOutputStream(
                 new FileOutputStream(path + "/" + p.getName()+".ser"))) {
             oos.writeObject(p);
-            return true;
         } catch (IOException ex)  {
-            System.out.println("Error while serializing person: " + ex.getMessage());
+            throw new SerializePersonIntoFileException("Error while serializing person");
         }
-        return false;
     }
 
     public static Person deserializePersonFromFile(String inputFile) {
         try (ObjectInputStream ois = new ObjectInputStream(
                 new FileInputStream(inputFile))) {
             return (Person) ois.readObject();
-        }catch (IOException | ClassNotFoundException ex)  {
-            System.out.println("Error while deserializing person: " + ex.getMessage());
+        } catch (IOException | ClassNotFoundException ex)  {
+            throw new ReadSerializedFileException("Error while deserializing person");
         }
-        return null;
     }
 
     public static boolean encryptFile(String inputFile, String outputFile, String password) {
